@@ -27,6 +27,17 @@ plt.ylabel("Viral Load (gene copies/L)")
 plt.legend(title="Sewershed")
 plt.show()
 
+# 2024 (all sewersheds)
+mask_2024 = (data["Sample_Date"] >= "2024-01-01") & (data["Sample_Date"] <= "2024-12-31")
+data_2024 = data.loc[mask_2024]
+
+sns.lineplot(data=data_2024, x="Sample_Date", y="Mean viral gene copies/L", hue="Sewershed", marker="o")
+plt.title("SARS-CoV-2 Viral Load by Sewershed (2024)")
+plt.xlabel("Sample Date")
+plt.ylabel("Viral Load (gene copies/L)")
+plt.legend(title="Sewershed")
+plt.show()
+
 # June–September 2022 (all sewersheds)
 mask = (data["Sample_Date"] >= "2022-06-01") & (data["Sample_Date"] <= "2022-09-30")
 data_filtered = data.loc[mask]
