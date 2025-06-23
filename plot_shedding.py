@@ -34,3 +34,6 @@ ax.set_ylim([0,curve[:,1].max()*1.25])
 fig.tight_layout()
 fig.savefig('plots/shedding_raw_data.pdf')
 plt.close()
+
+
+# TEST
