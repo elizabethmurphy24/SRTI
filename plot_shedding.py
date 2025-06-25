@@ -7,8 +7,8 @@ import statsmodels.api as sm
 lowess = sm.nonparametric.lowess
 shed_data = pd.read_csv('data/empirical_shedding_data.csv')
 
-shed_data['N_conc (gc/mg-dw)'] = shed_data['N_conc (gc/mg-dw)']*shed_data['N_det']
-
+shed_data['N_conc (gc/mg-dw)'] = shed_data['N_conc (gc/mg-dw)']/shed_data['PMMoV_conc (gc/mg-dw)']
+# shed_data = shed_data.dropna(how='any')
 curve =lowess(shed_data['N_conc (gc/mg-dw)'],shed_data['Day'],frac=0.25)
 curve = np.unique(curve, axis=0)
 
@@ -21,7 +21,7 @@ f = interpolate.interp1d(range(0,kernel_length), curve[:,1])
 # plot raw data in log scaling
 fig,ax = plt.subplots()
 ax.scatter(shed_data['Day'],shed_data['N_conc (gc/mg-dw)'])
-ax.set_yscale('log')
+# ax.set_yscale('log')
 fig.tight_layout()
 fig.savefig('plots/shedding_raw_data_just_data.pdf')
 plt.close()
